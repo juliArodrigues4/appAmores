@@ -8,27 +8,31 @@ export default function Editar({navigation, route}){
         <View style={styles.container}>
            <View>
                <Text style={styles.titulo}>
-                   Alterar dados do diário
+                   Alterar dados do agendamento de namoradas
                </Text>
            </View>
 
            <View>
-               <TextInput autoCapitalize='words' style={styles.input} placeholder='Digite o titulo' 
+               <TextInput autoCapitalize='words' style={styles.input} placeholder='Digite o nome da consagrada' 
                onChangeText={setTitulo} value={titulo}/>
 
-               <TextInput autoCapitalize='words' style={styles.input} placeholder='Digite o seu lindo dia' 
+               <TextInput autoCapitalize='words' style={styles.input} placeholder='Digite a descrição' 
                onChangeText={setTexto} value={texto}/>
 
-               <TextInput autoCapitalize='words' style={styles.input} placeholder='Digite a data atual' 
+               <TextInput autoCapitalize='words' style={styles.input} placeholder='Digite a data de aniversário dela' 
                onChangeText={setData} value={data}/>
 
-               
-               <TextInput autoCapitalize='words' style={styles.input} placeholder='Digite o se local atual' 
+               <TextInput autoCapitalize='words' style={styles.input} placeholder='Digite a data do encontro' 
+               onChangeText={setData} value={data}/>
+
+               <TextInput autoCapitalize='words' style={styles.input} placeholder='Digite o local do encontro' 
                onChangeText={setLocal} value={local}/>
 
+               <TextInput autoCapitalize='words' style={styles.input} placeholder='Digite coisas que ela gosta' 
+               onChangeText={setLike} value={like}/>
 
                <TouchableOpacity style={styles.btnAlterar} onPress={()=> {
-                   alterarDiario(id, titulo, texto, data, local);
+                   alterarDiario(id, titulo, texto, data, local, like);
                }}>
                    <Text style={styles.btnTxEnviar}> Alterar </Text>
                </TouchableOpacity>

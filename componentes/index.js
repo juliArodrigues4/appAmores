@@ -7,7 +7,7 @@ export default function Home({navigation}){
     return( 
     
     <View style={styles.container}>
-          <Text style={styles.title}> MAAA  </Text>
+          <Text style={styles.title}> Agendamento de namoradas  </Text>
      
     
           <FlatList
@@ -21,26 +21,35 @@ export default function Home({navigation}){
                   titulo: item.titulo,
                   texto: item.texto,
                   data: item.data,
-                  local: item.local
+                  local: item.local,
+                  like: item.like
                 })}>
     
                   <View style={styles.txInput}>
-                    <Text style={styles.titleDiario}> Titulo:  
+                    <Text style={styles.titleDiario}> Nome da consagrada:  
                       <Text style={styles.txDiario}> {item.titulo} </Text> 
                     </Text>
-    
-                    <Text style={styles.titleDiario}> Texto: 
-                      <Text style={styles.txDiario}> {item.texto} </Text>
+
+                    <Text style={styles.titleDiario}> Descrição:  
+                      <Text style={styles.txDiario}> {item.texto} </Text> 
                     </Text>
     
-                    <Text style={styles.titleDiario}> Data: 
+                    <Text style={styles.titleDiario}> Aniversário dela: 
                       <Text style={styles.txDiario}> {item.data} </Text>
                     </Text>
     
-                    <Text style={styles.titleDiario}> Local: 
-                      <Text style={styles.txDiario}> {item.local} </Text>
+                    <Text style={styles.titleDiario}> Data do encontro: 
+                      <Text style={styles.txDiario}> {item.data} </Text>
                     </Text>
     
+                    <Text style={styles.titleDiario}> Local do encontro: 
+                      <Text style={styles.txDiario}> {item.local} </Text>
+                    </Text>
+
+                    <Text style={styles.titleDiario}> Coisas que ela gosta: 
+                      <Text style={styles.txDiario} multiline={true} numberOfLines={20}> {item.like} </Text>
+                    </Text>
+            
                   </View>
                 </TouchableOpacity>
     
