@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-import Firebase from '../firebase';
+import { firestore } from "../firebase"; 
+import { collection, onSnapshot, deleteDoc, doc } from "firebase/firestore"; 
+
 
 export default function Home({navigation}){
 
   const [ notas, setNotas ] = useState([]);
 
-  function deleteNota(id){
-
-    Firebase.collection("notas").doc(id).delete();
-
-    Alert.alert("A nota foi deletada.");
+  async function deleteNota(id){
+    try{
+      await deleteDoc(doc(firestore, "notas", id)); 
+      Alert.alert("A nota foi deletada.");
+    } catch (error) {
+    console.error("A nota foi deletada.", error);
+  }
   }
 
   useEffect(()=>{
-    Firebase.collection("notas").onSnapshot((query)=>{
+    const unsubscribe = onSnapshot(collection(firestore, 'notas'), (querySnapshot) => {
       const lista = [];
-      query.forEach((doc) => {
+      querySnapshot.forEach((doc) => {
         lista.push({...doc.data(), id: doc.id});
       });
       setNotas(lista);
@@ -91,8 +95,7 @@ export default function Home({navigation}){
                   <MaterialCommunityIcons name="plus" size={60} color="#B03060" />
               </TouchableOpacity>
     
-              <TouchableOpacity  style={styles.altBotao} onPress={() => navigation.navigate("Editar")}
-              disabled={true}>
+              <TouchableOpacity  style={styles.altBotao} onPress={() => navigation.navigate("Editar")}>
                   <MaterialCommunityIcons name="pencil" size={50} color="#B03060" resizeMode="contain" />
               </TouchableOpacity>
     

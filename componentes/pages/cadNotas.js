@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
-import Firebase from '../firebase';
+import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, ScrollView } from 'react-native';
+import { firestore } from "../firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 export default function Cadastrar({navigation}){
 
@@ -11,15 +12,14 @@ export default function Cadastrar({navigation}){
     const [ local,  setLocal ] = useState('')
     const [ like, setLike ] = useState('')
 
-    function addNota() {
-        Firebase.collection('notas').add({
+    async function addNota() {
+        const docRef = await addDoc(collection(firestore, 'notas'), {
             titulo: titulo,
             texto: texto,
             aniversario: aniversario,
             data: data,
             local: local,
             like: like
-    
         });
         setTitulo({titulo: ''})
         setTexto({texto: ''})
@@ -27,8 +27,7 @@ export default function Cadastrar({navigation}){
         setLocal({local: ''})
         Alert.alert("Nova nota", "Nova nota adicionada com sucesso");
         navigation.navigate("Home");
-    }
-    
+    };
     
       const confirmar = () => {
     
@@ -42,6 +41,7 @@ export default function Cadastrar({navigation}){
       }
 
     return(
+      <ScrollView>
         <View style={styles.container}>
             <View>
                 <Text style={styles.titulo}>
@@ -86,6 +86,7 @@ export default function Cadastrar({navigation}){
 
             </View>
         </View>
+      </ScrollView>
     );
 }
 

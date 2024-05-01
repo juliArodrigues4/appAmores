@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
-import Firebase from '../firebase';
+import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, ScrollView } from 'react-native';
+import { firestore } from "../firebase";
+import { collection, doc, updateDoc } from "firebase/firestore";
 
 export default function Editar({navigation, route}){
 
-    const id = route.params.id;
+    const id = route.params?.id;
 
-    const [ titulo, setTitulo ]           = useState(route.params.titulo);
-    const [ texto,  setTexto  ]           = useState(route.params.texto);
-    const [ aniversario, setAniversario ] = useState(route.params.aniversario);
-    const [ data,   setData   ]           = useState(route.params.data);
-    const [ local,  setLocal  ]           = useState(route.params.local);
-    const [ like, setLike ]               = useState(route.params.like);
+    const [ titulo, setTitulo ]           = useState(route.params?.titulo);
+    const [ texto,  setTexto  ]           = useState(route.params?.texto);
+    const [ aniversario, setAniversario ] = useState(route.params?.aniversario);
+    const [ data,   setData   ]           = useState(route.params?.data);
+    const [ local,  setLocal  ]           = useState(route.params?.local);
+    const [ like, setLike ]               = useState(route.params?.like);
 
     
-   function alterarNota(id, titulo, texto, aniversario, data, local, like)
+   async function alterarNota(id, titulo, texto, aniversario, data, local, like)
    {
-    Firebase.collection("notas").doc(id).update({
+    try{
+    await updateDoc(doc(collection(firestore, "notas"), id), {
         titulo: titulo,
         texto: texto,
         aniversario: aniversario,
@@ -27,8 +29,14 @@ export default function Editar({navigation, route}){
     Alert.alert("Aviso", "Nota alterada com sucesso");
     navigation.navigate("Home");
   }
+  catch (error) {
+            console.error("Erro ao alterar: ", error);
+            Alert.alert("Erro", "Erro ao alterar. Por favor, tente novamente.");
+        }
+   }
  
     return(
+      <ScrollView>
         <View style={styles.container}>
            <View>
                <Text style={styles.titulo}>
@@ -63,6 +71,7 @@ export default function Editar({navigation, route}){
 
            </View>
        </View>
+    </ScrollView>
    );
 }
 
@@ -174,7 +183,7 @@ const styles = StyleSheet.create({
         bottom: 0,
         width: 80,
         height: 80,
-        borderRadius: '50%',
+        borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center'
       },
