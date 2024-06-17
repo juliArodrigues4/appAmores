@@ -52,28 +52,28 @@ export default function Home({navigation}){
                 })}>
     
                   <View style={styles.txInput}>
-                    <Text style={styles.titleDiario}> Nome da consagrada:  
-                      <Text style={styles.txDiario}> {item.titulo} </Text> 
+                    <Text style={[styles.txDiario, {fontWeight: "bold"}]}> Nome da consagrada:  
+                      <Text style={styles.titleDiario}> {item.titulo} </Text> 
                     </Text>
 
-                    <Text style={styles.titleDiario}> Descrição:  
-                      <Text style={styles.txDiario}> {item.texto} </Text> 
+                    <Text style={[styles.txDiario, {fontWeight: "bold"}]}> Descrição:  
+                      <Text style={styles.titleDiario}> {item.texto} </Text> 
                     </Text>
     
-                    <Text style={styles.titleDiario}> Aniversário dela: 
-                      <Text style={styles.txDiario}> {item.aniversario} </Text>
+                    <Text style={[styles.txDiario, {fontWeight: "bold"}]}> Aniversário dela: 
+                      <Text style={styles.titleDiario}> {item.aniversario} </Text>
                     </Text>
     
-                    <Text style={styles.titleDiario}> Data do encontro: 
-                      <Text style={styles.txDiario}> {item.data} </Text>
+                    <Text style={[styles.txDiario, {fontWeight: "bold"}]}> Data do encontro: 
+                      <Text style={styles.titleDiario}> {item.data} </Text>
                     </Text>
     
-                    <Text style={styles.titleDiario}> Local do encontro: 
-                      <Text style={styles.txDiario}> {item.local} </Text>
+                    <Text style={[styles.txDiario, {fontWeight: "bold"}]}> Local do encontro: 
+                      <Text style={styles.titleDiario}> {item.local} </Text>
                     </Text>
 
-                    <Text style={styles.titleDiario}> Coisas que ela gosta: 
-                      <Text style={styles.txDiario} multiline={true} numberOfLines={20}> {item.like} </Text>
+                    <Text style={[styles.txDiario, {fontWeight: "bold"}]}> Coisas que ela gosta: 
+                      <Text style={styles.titleDiario} multiline={true} numberOfLines={20}> {item.like} </Text>
                     </Text>
             
                   </View>
@@ -129,13 +129,12 @@ export default function Home({navigation}){
           borderRadius:10
         },
         titleDiario:{
-          fontSize: 16,
+          fontSize: 15,
           color:'#fff',
-          fontWeight: "bold",
           marginBottom: 5,
         },
         txDiario:{
-          fontSize: 15,
+          fontSize: 16,
           color: '#fff'
         },
         botaoDeletar:{
@@ -154,7 +153,7 @@ export default function Home({navigation}){
           height: 70
         },
         txInput:{
-          width: 300,
+          width: 250,
           height: 150,
           justifyContent: 'space-evenly',
           alignItems: 'left'
